@@ -1,0 +1,16 @@
+Jupyter (armazenar no GitHub)
+
+
+pyautogui. press("Win")
+time.sleep(3)
+pyautogui.write("Edge")
+time.sleep(4)
+pyautogui.press("Enter")
+time.sleep(3)
+pyautogui.write("file:///C:/Users/Edvaldo/Documents/Faculdade/teste2/index.html")
+time.sleep(3)
+pyautogui.press("Enter")
+time.sleep(3)
+pyautogui.press("Tab")
+time.sleep(3)
+pyautogui.press("Boa noite")
