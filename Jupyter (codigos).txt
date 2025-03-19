@@ -1,16 +1,50 @@
-Jupyter (armazenar no GitHub)
+import pyautogui
+import time
 
-
-pyautogui. press("Win")
+pyautogui.press("win")
 time.sleep(3)
 pyautogui.write("Edge")
 time.sleep(4)
-pyautogui.press("Enter")
+pyautogui.press("enter")
 time.sleep(3)
-pyautogui.write("file:///C:/Users/Edvaldo/Documents/Faculdade/teste2/index.html")
+pyautogui.write("file:///C:/Users/Edvaldo/Downloads/1000/index.html")
 time.sleep(3)
-pyautogui.press("Enter")
+pyautogui.press("enter")
 time.sleep(3)
-pyautogui.press("Tab")
+
+time.sleep(2)
+pyautogui.press("tab")
+time.sleep(1)
+pyautogui.write("Nome Teste")
+
+time.sleep(1)
+pyautogui.press("tab")
+time.sleep(1)
+pyautogui.write("UsuarioTeste")
+
+time.sleep(1)
+pyautogui.press("tab")
+time.sleep(1)
+pyautogui.write("Senha123")
+
+time.sleep(1)
+pyautogui.press("tab")
+time.sleep(1)
+pyautogui.write("Senha123")  
+
+time.sleep(1)
+pyautogui.press("tab") 
+
+time.sleep(1)
+pyautogui.press("enter")  
+
 time.sleep(3)
-pyautogui.press("Boa noite")
+
+pyautogui.press("tab")  
+time.sleep(1)
+for i in range(50):  
+    pyautogui.press("backspace")
+    pyautogui.write("A")
+    time.sleep(0.05)  
+
+time.sleep(2)  
