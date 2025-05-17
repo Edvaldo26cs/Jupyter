@@ -1,0 +1,68 @@
+<!--1 – Inserir e-mail válido (ex:prova@hotmail.com);
+2 – Inserir e-mail inválido (ex:prova@hotmail);
+3 – Deixar o campo de e-mail em branco -> exibição da mensagem de erro;
+4 – Inserir senha válida:
+• 3 e 6 caracteres,
+• Pelo menos um número,
+• Um caractere especial,
+• Uma letra maiúscula,
+• Letra minúscula;
+5 – Inserir senha: - 6 ou + 6 – exibição de mensagem de erro;
+6 – Inserir senha sem número - exibição de mensagem de erro;
+7 – Inserir senha sem caractere especial - exibição de mensagem de erro;
+8 – Inserir senha sem letra maiúscula - exibição de mensagem de erro;
+9 – Inserir senha sem letra minúscula - exibição de mensagem de erro;
+10 – Deixar o campo senha em branco - exibição de mensagem de erro;
+11 – Clicar em entrar com e-mail e senha válidos e corretos (teste@email.com/1@Bc);
+12 – Clicar em entrar com e-mail e senha válidos e não correspondentes ao correto (teste@email.com/1@Bc) alerta – credenciais inválidas;
+13 – Redirecionar para página “login efetuado com sucesso”;
+14 – Interface com responsividade;
+15 – Links “esqueci a senha” e “ajuda” são clicáveis e não funcionais;
+16 – Campos válidos recebem borda verde;
+17 – Campos inválidos recebem borda vermelha.!-->
+
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema de Ponto</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h1>Login</h1>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" onblur="validarEmail()">
+                    <div class="alert" id="emailAlert"></div>
+                </div>
+                <div class="input-group">
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" name="password" onblur="validarSenha()">
+                    <div class="alert" id="passwordAlert"></div>
+                </div>
+                <div class="button-wrapper">
+                    <button type="button" class="btn" onclick="validarLogin()">
+                        <span>Entrar</span>
+                        <svg width="100%" height="100%">
+                            <rect width="100%" height="100%" style="stroke-width:3;"></rect>
+                        </svg>
+                    </button>
+                </div>
+                <div class="menu-ficticio">
+                    <a href="#">Esqueci minha senha</a>
+                    <a href="#">Ajuda</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="tratamento.js"></script>
+</body>
+</html>
