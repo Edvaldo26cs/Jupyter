@@ -1,50 +1,98 @@
-import pyautogui
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
+import logging
 
-pyautogui.press("win")
-time.sleep(3)
-pyautogui.write("Edge")
-time.sleep(4)
-pyautogui.press("enter")
-time.sleep(3)
-pyautogui.write("file:///C:/Users/Edvaldo/Downloads/1000/index.html")
-time.sleep(3)
-pyautogui.press("enter")
-time.sleep(3)
+# -------------------- CONFIGURAÇÃO DO LOG --------------------
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
-time.sleep(2)
-pyautogui.press("tab")
-time.sleep(1)
-pyautogui.write("Nome Teste")
+# Log em arquivo
+arquivo_log = logging.FileHandler("log_teste_login.log")
+arquivo_log.setLevel(logging.INFO)
 
-time.sleep(1)
-pyautogui.press("tab")
-time.sleep(1)
-pyautogui.write("UsuarioTeste")
+# Log no console (Jupyter Notebook)
+console_log = logging.StreamHandler()
+console_log.setLevel(logging.INFO)
 
-time.sleep(1)
-pyautogui.press("tab")
-time.sleep(1)
-pyautogui.write("Senha123")
+# Formato do log
+formato_log = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+arquivo_log.setFormatter(formato_log)
+console_log.setFormatter(formato_log)
 
-time.sleep(1)
-pyautogui.press("tab")
-time.sleep(1)
-pyautogui.write("Senha123")  
+# Adiciona os dois outputs ao logger
+logger.addHandler(arquivo_log)
+logger.addHandler(console_log)
 
-time.sleep(1)
-pyautogui.press("tab") 
+# -------------------- INICIALIZAÇÃO DO NAVEGADOR --------------------
+servico = Service(ChromeDriverManager().install())
+navegador = webdriver.Chrome(service=servico)
 
-time.sleep(1)
-pyautogui.press("enter")  
+try:
 
-time.sleep(3)
+    navegador.get ("file:///C:/Users/edvaldo.neto/Downloads/Prova de teste de software/projetoteste/projetoteste/login.html")
 
-pyautogui.press("tab")  
-time.sleep(1)
-for i in range(50):  
-    pyautogui.press("backspace")
-    pyautogui.write("A")
-    time.sleep(0.05)  
+    wait = WebDriverWait(navegador, 10)
+    campo_email = wait.until(EC.presence_of_element_located((By.ID, "email")))
+    campo_senha = wait.until(EC.presence_of_element_located((By.ID, "password")))
+    botao_login = wait.until(EC.presence_of_element_located((By.TAG_NAME, "button")))
 
-time.sleep(2)  
+    # -------------------- CASO 1: CAMPOS VAZIOS --------------------
+    logging.info("Caso 1: Campos vazios")
+    campo_email.clear()
+    campo_senha.clear()
+    botao_login.click()
+    time.sleep(1)
+
+    # -------------------- CASO 2: EMAIL VÁLIDO, SENHA VAZIA --------------------
+    logging.info("Caso 2: Email válido, senha vazia")
+    campo_email.clear()
+    campo_email.send_keys("teste@email.com")
+    campo_senha.clear()
+    botao_login.click()
+    time.sleep(1)
+
+    # -------------------- CASO 3: EMAIL VAZIO, SENHA VÁLIDA --------------------
+    logging.info("Caso 3: Email vazio, senha válida")
+    campo_email.clear()
+    campo_senha.clear()
+    campo_senha.send_keys("1@Bc")
+    botao_login.click()
+    time.sleep(1)
+
+    # -------------------- CASO 4: CAMPOS VÁLIDOS --------------------
+    logging.info("Caso 4: Email e senha válidos")
+    campo_email.clear()
+    campo_email.send_keys("teste@email.com")
+    campo_senha.clear()
+    campo_senha.send_keys("1@Bc")
+    botao_login.click()
+    time.sleep(1)
+
+    # -------------------- CASO 5: DIGITAÇÃO PASSO A PASSO --------------------
+    logging.info("Caso 5: Digitação passo a passo")
+    campo_email.clear()
+    for letra in "usuarioteste@email.com":
+        campo_email.send_keys(letra)
+        time.sleep(0.1)
+
+    campo_senha.clear()
+    for letra in "Senha123!":
+        campo_senha.send_keys(letra)
+        time.sleep(0.1)
+
+    botao_login.click()
+    logging.info("Caso 5 executado com sucesso")
+
+    logging.info(" Todos os testes foram concluídos com sucesso.")
+
+except Exception as erro:
+    logging.error(f" Erro durante os testes: {erro}")
+
+finally:
+    navegador.quit()
+
