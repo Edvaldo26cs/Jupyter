@@ -30,4 +30,16 @@
 
 ---
 
+### 🇵🇹 Dificuldades encontradas (em português):
+
+1. The notebook stopped opening the Anaconda program, so it had to be reinstalled in order to use it.
+2. The code is not that complicated, but as time was short, we learned how to perform the tests with chatgpt.
+3. Unlike Cypress, it is not difficult to use.
+
+---
+
+### 🇬🇧 Test Steps (in English):
+
+
+
 > ✅ These steps simulate a real-world automation testing flow using open-source tools. Great for showcasing technical and QA skills!
